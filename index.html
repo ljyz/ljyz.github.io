@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        div{
+            width: 100%;
+            height: 100%;
+            border: 1px dashed #999;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">请拖拽上传</div>
+    <script>
+        var box = document.querySelector('#box');
+        box.ondrop = function(e){
+            e.preventDefault();
+            var reader = new FileReader();
+            console.log(e.dataTransfer.files);
+            reader.readAsDataURL(e.dataTransfer.files[0]);
+            console.log(reader.result)
+            reader.onload = function(){
+                document.body.style.backgroundImage = "url("+reader.result+")";
+            }
+        }
+        box.ondragover = function(e){
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>
